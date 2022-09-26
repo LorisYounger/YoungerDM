@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DMYounger4"
              mc:Ignorable="d" 
-        Title="Display" Height="400" Width="300" ShowInTaskbar="False" Background="#FFF">
+        Title="Display" Height="400" Width="300" ShowInTaskbar="False" Background="#FFF"
+        SizeChanged="Window_SizeChanged">
     <Grid>
-        <WrapPanel x:Name="Main" Margin="5,20,5,5" Orientation="Vertical">
+        <StackPanel x:Name="Main" Margin="5,20,5,5" Orientation="Vertical">
 
-        </WrapPanel>
+        </StackPanel>
         <Label x:Name="LableTitle" Content="Label" HorizontalAlignment="Left" Margin="1,-3,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

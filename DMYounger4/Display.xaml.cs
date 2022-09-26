@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinePutScript;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,15 @@ namespace DMYounger4
         public Display()
         {
             InitializeComponent();
+            Width = DMYounger.Saves["Display"].GetDouble("Width", 300);
+            Height = DMYounger.Saves["Display"].GetDouble("Height", 400);
         }
-        public void RemoveUIE(UIElement obj) => Main.Dispatcher.BeginInvoke(new Action(() => Main.Children.Remove(obj)));     
+        public void RemoveUIE(UIElement obj) => Main.Dispatcher.BeginInvoke(new Action(() => Main.Children.Remove(obj)));
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            DMYounger.Saves["Display"][(gdbe)"Width"] = Width;
+            DMYounger.Saves["Display"][(gdbe)"Height"] = Height;
+        }
     }
 }
