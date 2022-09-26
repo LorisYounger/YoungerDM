@@ -1,0 +1,15 @@
+﻿<Window x:Class="DMYounger4.Display"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DMYounger4"
+             mc:Ignorable="d" 
+        Title="Display" Height="400" Width="300" ShowInTaskbar="False" Background="#FFF">
+    <Grid>
+        <WrapPanel x:Name="Main" Margin="5,20,5,5" Orientation="Vertical">
+
+        </WrapPanel>
+        <Label x:Name="LableTitle" Content="Label" HorizontalAlignment="Left" Margin="1,-3,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
