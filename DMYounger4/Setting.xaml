@@ -1,20 +1,20 @@
 ﻿<Window x:Class="DMYounger4.Setting" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" FontSize="12"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:DMYounger4"
-        mc:Ignorable="d" Title="设置" Width="300" ShowInTaskbar="False" Background="#FFF" ResizeMode="NoResize">
+        mc:Ignorable="d" Title="设置" Width="300" ShowInTaskbar="False" Background="#FFF" ResizeMode="NoResize" Height="Auto">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Button VerticalAlignment="Top" Margin="5,5,5,0" Content="打开设置文件目录" Grid.ColumnSpan="3" Height="20"
                 Click="open_path_click" />
         <Button VerticalAlignment="Top" Margin="5,30,5,0" Content="更新用户头像" Grid.Column="2" Height="20"
                 Click="update_image_click" />
-        <TextBox VerticalAlignment="Top" Margin="5,30,5,0" Height="20" Text="用户ID" />
-        <TextBox VerticalAlignment="Top" Margin="5,30,5,0" Height="20" Text="cookies" Grid.Column="1" />
+        <TextBox x:Name="UserID" VerticalAlignment="Top" Margin="5,30,5,0" Height="20" Text="用户ID" />
+        <TextBox x:Name="UserCookies" VerticalAlignment="Top" Margin="5,30,5,0" Height="20" Text="cookies" Grid.Column="1" />
         <Button VerticalAlignment="Top" Margin="5,55,5,5" Content="生成感谢名单" Grid.ColumnSpan="3" Height="20"
                 Click="create_thanks_click" />
         <TextBox x:Name="Outputbox" VerticalAlignment="Top" Margin="5,80,5,5" Text="" Grid.ColumnSpan="3"

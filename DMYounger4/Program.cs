@@ -11,6 +11,7 @@ namespace DMYounger4
 {
     public class DMYounger : BilibiliDM_PluginFramework.DMPlugin
     {
+        public static LpsDocument Saves;
         public DMYounger()
         {
             this.PluginAuth = "洛里斯杨远";
@@ -22,28 +23,40 @@ namespace DMYounger4
             //this.Disconnected += DMYounger_Disconnected;
             this.ReceivedDanmaku += DMYounger_ReceivedDanmaku;
             this.ReceivedRoomCount += DMYounger_ReceivedRoomCount;
-            mainwin = new Display();
-            smtimer = new System.Timers.Timer();
-            autosave = new System.Timers.Timer();
-            //{
-            //    AutoReset = true,
-            //    Interval = 60000
-            //};
-            ////把方法传递下
-            sendLog = this.Log;
-            //sendDM = this.AddDM;
+
+
             //读取数据
             BiliUsers = new List<Users>();
             if (!Directory.Exists(SoftPath))
                 Directory.CreateDirectory(SoftPath);
+            if (!Directory.Exists(SoftPath + @"\usr"))
+                Directory.CreateDirectory(SoftPath + @"\usr");
             if (!File.Exists(SoftPath + @"\main.png"))
                 Properties.Resources.Younger.Save(SoftPath + @"\default.png");
             if (File.Exists(SoftPath + @"\users.lpt"))
             {
-                var data = new LpsDocument(System.IO.File.ReadAllText(SoftPath + @"\users.lpt"));
+                var data = new LpsDocument(File.ReadAllText(SoftPath + @"\users.lpt"));
                 foreach (Line dt in data)
                     BiliUsers.Add(new Users(dt));
-            }   //請勿使用任何阻塞方法
+            }
+            if (File.Exists(SoftPath + @"\saves.lpt"))
+                Saves = new LpsDocument(File.ReadAllText(SoftPath + @"\saves.lpt"));
+            else
+                Saves = new LpsDocument("setting#YoungerDM:|");
+
+
+            mainwin = new Display();
+            smtimer = new System.Timers.Timer();
+            autosave = new System.Timers.Timer()
+            {
+                AutoReset = true,
+                Interval = 60000
+            };
+            ////把方法传递下
+            sendLog = this.Log;
+            //sendDM = this.AddDM;
+            
+            //請勿使用任何阻塞方法
         }
 
         public override void Start()
@@ -67,16 +80,18 @@ namespace DMYounger4
                 foreach (Users usr in BiliUsers)
                     lps.AddLine(usr.ToLine());
                 File.WriteAllText(SoftPath + @"\users.lpt", lps.ToString());
-            }catch (Exception ex)
+                File.WriteAllText(SoftPath + @"\saves.lpt", Saves.ToString());
+            }
+            catch (Exception ex)
             {
-                this.AddDM(ex.ToString());  
+                this.AddDM(ex.ToString());
             }
         }
 
         private void DMYounger_ReceivedRoomCount(object sender, BilibiliDM_PluginFramework.ReceivedRoomCountArgs e)
         {
             Users usrfist = null;
-            foreach (Users usr in BiliUsers.OrderBy(x => x.TempPoint).Reverse())
+            foreach (Users usr in BiliUsers.OrderByDescending(x => x.TempPoint))
             {
                 if (usr.Name != "")
                 {
@@ -109,7 +124,7 @@ namespace DMYounger4
             foreach (Users usr in BiliUsers)
                 lps.AddLine(usr.ToLine());
             File.WriteAllText(SoftPath + @"\users.lpt", lps.ToString());
-
+            File.WriteAllText(SoftPath + @"\saves.lpt", Saves.ToString());
             //請勿使用任何阻塞方法
             this.AddDM("杨远弹幕插件已关闭\n程序数据已存档\n下播啦啦啦!", true);
         }
