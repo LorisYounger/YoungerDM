@@ -193,7 +193,7 @@ namespace DMYounger4
         }
         public static void sendDM(Users usr, string dm, int showtime = 20)
         {
-            mainwin.Main.Dispatcher.BeginInvoke(new Action(() => mainwin.Main.Children.Add(new UserTalk(usr, dm, showtime))));
+            mainwin.Main.Dispatcher.BeginInvoke(new Action(() => mainwin.Main.Children.Add(new UserTalk(usr, dm, showtime, mainwin.Main.ActualWidth))));
         }
 
         /// <summary>
